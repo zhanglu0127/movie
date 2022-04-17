@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * 视频处理类
+ */
 @Service
 public class IFfmpegServiceImpl implements IFfmpegService {
 
