@@ -163,9 +163,9 @@ public class MovieSourceInfoServiceImpl implements IMovieSourceInfoService
      */
     public void dealFilm(String absPath, String fileName) throws IOException, InterruptedException {
         // 上下三分屏处理
-        absPath = ffmpegService.dealThreePrint(absPath, fileName);
+        //absPath = ffmpegService.dealThreePrint(absPath, fileName);
         //添加西瓜视频
-        absPath = ffmpegService.addWaterMelon(absPath, fileName);
+        //absPath = ffmpegService.addWaterMelon(absPath, fileName);
         //上下添加文字
         absPath = ffmpegService.addDub(absPath, fileName);
     }

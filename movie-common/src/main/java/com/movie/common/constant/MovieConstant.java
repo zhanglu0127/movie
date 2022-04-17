@@ -1,6 +1,6 @@
 package com.movie.common.constant;
 
-public class FilmConstant {
+public class MovieConstant {
 
     /**
      * 获取视频长度

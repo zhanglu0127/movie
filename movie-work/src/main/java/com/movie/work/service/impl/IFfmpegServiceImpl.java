@@ -1,7 +1,7 @@
 package com.movie.work.service.impl;
 
 import com.movie.common.config.ProjectConfig;
-import com.movie.common.constant.FilmConstant;
+import com.movie.common.constant.MovieConstant;
 import com.movie.common.utils.file.FileUploadUtils;
 import com.movie.work.service.IFfmpegService;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class IFfmpegServiceImpl implements IFfmpegService {
     public String dealThreePrint(String absPath, String fileName) throws IOException, InterruptedException {
         // 黑底文件的绝对路径
         String absBlackPath = FileUploadUtils.getAbsoluteFile(ProjectConfig.getUploadPath(), "source/black.jpg").getAbsolutePath();
-        String command = String.format(FilmConstant.FILM_IMAGE_BLACK, absBlackPath, absPath, absBlackPath, absPath);
+        String command = String.format(MovieConstant.FILM_IMAGE_BLACK, absBlackPath, absPath, absBlackPath, absPath);
         System.out.println(command);
         String[] commands = {"sh", "-c", command.toString() + "&"};
         // 执行文件处理
