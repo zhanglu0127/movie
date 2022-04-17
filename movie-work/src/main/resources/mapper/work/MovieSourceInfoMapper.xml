@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.work.mapper.MovieSourceInfoMapper">
+    
+    <resultMap type="MovieSourceInfo" id="MovieSourceInfoResult">
+        <result property="movieSourceId"    column="movie_source_id"    />
+        <result property="movieSourceName"    column="movie_source_name"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectMovieSourceInfoVo">
+        select movie_source_id, movie_source_name, create_time from movie_source_info
+    </sql>
+
+    <select id="selectMovieSourceInfoList" parameterType="MovieSourceInfo" resultMap="MovieSourceInfoResult">
+        <include refid="selectMovieSourceInfoVo"/>
+        <where>  
+            <if test="movieSourceName != null  and movieSourceName != ''"> and movie_source_name like concat('%', #{movieSourceName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectMovieSourceInfoByMovieSourceId" parameterType="Long" resultMap="MovieSourceInfoResult">
+        <include refid="selectMovieSourceInfoVo"/>
+        where movie_source_id = #{movieSourceId}
+    </select>
+        
+    <insert id="insertMovieSourceInfo" parameterType="MovieSourceInfo" useGeneratedKeys="true" keyProperty="movieSourceId">
+        insert into movie_source_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="movieSourceName != null">movie_source_name,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="movieSourceName != null">#{movieSourceName},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMovieSourceInfo" parameterType="MovieSourceInfo">
+        update movie_source_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="movieSourceName != null">movie_source_name = #{movieSourceName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where movie_source_id = #{movieSourceId}
+    </update>
+
+    <delete id="deleteMovieSourceInfoByMovieSourceId" parameterType="Long">
+        delete from movie_source_info where movie_source_id = #{movieSourceId}
+    </delete>
+
+    <delete id="deleteMovieSourceInfoByMovieSourceIds" parameterType="String">
+        delete from movie_source_info where movie_source_id in 
+        <foreach item="movieSourceId" collection="array" open="(" separator="," close=")">
+            #{movieSourceId}
+        </foreach>
+    </delete>
+</mapper>

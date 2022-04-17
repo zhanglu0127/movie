@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.movie.work.mapper.MovieOperateInfoMapper">
+    
+    <resultMap type="MovieOperateInfo" id="MovieOperateInfoResult">
+        <result property="movieOperateId"    column="movie_operate_id"    />
+        <result property="movieSourceId"    column="movie_source_id"    />
+        <result property="movieSourceName"    column="movie_source_name"    />
+        <result property="movieName"    column="movie_name"    />
+        <result property="moviePath"    column="movie_path"    />
+        <result property="movieLength"    column="movie_length"    />
+        <result property="movieStep"    column="movie_step"    />
+        <result property="movieOperateState"    column="movie_operate_state"    />
+        <result property="movieReleaseState"    column="movie_release_state"    />
+        <result property="movieNo"    column="movie_no"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectMovieOperateInfoVo">
+        select movie_operate_id, movie_source_id, movie_source_name, movie_name, movie_path, movie_length, movie_step, movie_operate_state, movie_release_state, movie_no, create_time, update_time from movie_operate_info
+    </sql>
+
+    <select id="selectMovieOperateInfoList" parameterType="MovieOperateInfo" resultMap="MovieOperateInfoResult">
+        <include refid="selectMovieOperateInfoVo"/>
+        <where>  
+            <if test="movieSourceId != null "> and movie_source_id = #{movieSourceId}</if>
+            <if test="movieSourceName != null  and movieSourceName != ''"> and movie_source_name like concat('%', #{movieSourceName}, '%')</if>
+            <if test="movieName != null  and movieName != ''"> and movie_name like concat('%', #{movieName}, '%')</if>
+            <if test="moviePath != null  and moviePath != ''"> and movie_path = #{moviePath}</if>
+            <if test="movieLength != null "> and movie_length = #{movieLength}</if>
+            <if test="movieStep != null  and movieStep != ''"> and movie_step = #{movieStep}</if>
+            <if test="movieOperateState != null "> and movie_operate_state = #{movieOperateState}</if>
+            <if test="movieReleaseState != null "> and movie_release_state = #{movieReleaseState}</if>
+            <if test="movieNo != null "> and movie_no = #{movieNo}</if>
+        </where>
+    </select>
+    
+    <select id="selectMovieOperateInfoByMovieOperateId" parameterType="Long" resultMap="MovieOperateInfoResult">
+        <include refid="selectMovieOperateInfoVo"/>
+        where movie_operate_id = #{movieOperateId}
+    </select>
+        
+    <insert id="insertMovieOperateInfo" parameterType="MovieOperateInfo" useGeneratedKeys="true" keyProperty="movieOperateId">
+        insert into movie_operate_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="movieSourceId != null">movie_source_id,</if>
+            <if test="movieSourceName != null">movie_source_name,</if>
+            <if test="movieName != null">movie_name,</if>
+            <if test="moviePath != null">movie_path,</if>
+            <if test="movieLength != null">movie_length,</if>
+            <if test="movieStep != null">movie_step,</if>
+            <if test="movieOperateState != null">movie_operate_state,</if>
+            <if test="movieReleaseState != null">movie_release_state,</if>
+            <if test="movieNo != null">movie_no,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="movieSourceId != null">#{movieSourceId},</if>
+            <if test="movieSourceName != null">#{movieSourceName},</if>
+            <if test="movieName != null">#{movieName},</if>
+            <if test="moviePath != null">#{moviePath},</if>
+            <if test="movieLength != null">#{movieLength},</if>
+            <if test="movieStep != null">#{movieStep},</if>
+            <if test="movieOperateState != null">#{movieOperateState},</if>
+            <if test="movieReleaseState != null">#{movieReleaseState},</if>
+            <if test="movieNo != null">#{movieNo},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMovieOperateInfo" parameterType="MovieOperateInfo">
+        update movie_operate_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="movieSourceId != null">movie_source_id = #{movieSourceId},</if>
+            <if test="movieSourceName != null">movie_source_name = #{movieSourceName},</if>
+            <if test="movieName != null">movie_name = #{movieName},</if>
+            <if test="moviePath != null">movie_path = #{moviePath},</if>
+            <if test="movieLength != null">movie_length = #{movieLength},</if>
+            <if test="movieStep != null">movie_step = #{movieStep},</if>
+            <if test="movieOperateState != null">movie_operate_state = #{movieOperateState},</if>
+            <if test="movieReleaseState != null">movie_release_state = #{movieReleaseState},</if>
+            <if test="movieNo != null">movie_no = #{movieNo},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where movie_operate_id = #{movieOperateId}
+    </update>
+
+    <delete id="deleteMovieOperateInfoByMovieOperateId" parameterType="Long">
+        delete from movie_operate_info where movie_operate_id = #{movieOperateId}
+    </delete>
+
+    <delete id="deleteMovieOperateInfoByMovieOperateIds" parameterType="String">
+        delete from movie_operate_info where movie_operate_id in 
+        <foreach item="movieOperateId" collection="array" open="(" separator="," close=")">
+            #{movieOperateId}
+        </foreach>
+    </delete>
+</mapper>
