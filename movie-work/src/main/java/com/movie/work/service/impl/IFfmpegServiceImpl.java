@@ -41,14 +41,15 @@ public class IFfmpegServiceImpl implements IFfmpegService {
      */
     @Override
     public String addDub(String absPath, String fileName) throws IOException, InterruptedException {
-
+        // 输出文件的绝对路径
+        String withWordOut = FileUploadUtils.getAbsoluteFile(ProjectConfig.getUploadPath() + "/withWordOut", fileName).getAbsolutePath();
         StringBuffer command = new StringBuffer();
         command.append("ffmpeg -i " + absPath + " -vf ");
         command.append(" \" drawtext=fontfile=/data/web/qipa250/font/big.ttf:text='因为一段片段 看完整部电影':y=(h-line_h)/6:x=(w-text_w)/2::fontsize=60:fontcolor=white:shadowy=2,");
         command.append(" drawtext=fontfile=/data/web/qipa250/font/big.ttf:text='盘点那些让人百看不厌的经典电影片段':y=(h-line_h)/6+150:x=(w-text_w)/2::fontsize=40:fontcolor=white:shadowy=2,");
         command.append(" drawtext=fontfile=/data/web/qipa250/font/big.ttf:text='电影名':y=3*(h-line_h)/4-20:x=(w-text_w)/2::fontsize=60:fontcolor=yellow:shadowy=2,");
         command.append(" drawtext=fontfile=/data/web/qipa250/font/big.ttf:text='点击右侧头像看全集':y=3*(h-line_h)/4+50:x=(w-text_w)/2::fontsize=40:fontcolor=red:shadowy=2 \" ");
-        command.append(absPath);
+        command.append(withWordOut);
         System.out.println(command.toString());
         String[] commands = {"sh", "-c", command.toString() + "&"};
         // 执行文件处理

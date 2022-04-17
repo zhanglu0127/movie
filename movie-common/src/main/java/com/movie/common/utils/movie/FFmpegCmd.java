@@ -1,7 +1,7 @@
 package com.movie.common.utils.movie;
 
 
-import com.ruoyi.common.constant.FilmConstant;
+import com.movie.common.constant.MovieConstant;
 
 public class FFmpegCmd {
 
@@ -14,9 +14,9 @@ public class FFmpegCmd {
 	 * @param height 修改高度
 	 */
 	public static void expandBoundaryMethod(String videoPath,String outPath,Integer width,Integer height){
-		width = width==null? FilmConstant.AUTO:width;
-		height = height==null? FilmConstant.AUTO:height;
-		String cmd = String.format (FilmConstant.EXPAND_BOUNDARY,videoPath,width,height,outPath);
+		width = width==null? MovieConstant.AUTO:width;
+		height = height==null? MovieConstant.AUTO:height;
+		String cmd = String.format (MovieConstant.EXPAND_BOUNDARY,videoPath,width,height,outPath);
 		CmdUtil.execCmd (cmd);
 	}
 
@@ -27,7 +27,7 @@ public class FFmpegCmd {
 	 * @param outPath 输出路径
 	 */
 	public static void settingCoverMethod(String videoPath,String imgPath,String outPath){
-		String cmd = String.format (FilmConstant.SETTING_COVER,videoPath,imgPath,outPath);
+		String cmd = String.format (MovieConstant.SETTING_COVER,videoPath,imgPath,outPath);
 		String s = CmdUtil.execCmd (cmd);
 		System.out.println (s);
 	}
@@ -49,15 +49,15 @@ public class FFmpegCmd {
 		return min;
 	}
 	public static void imageOverlayMethod(String coverImage,String fontImage,Integer width,Integer height,String output){
-		String cmd = String.format (FilmConstant.Image_OverLay,coverImage,fontImage,width,height,output);
+		String cmd = String.format (MovieConstant.Image_OverLay,coverImage,fontImage,width,height,output);
 		CmdUtil.execCmd (cmd);
 	}
 	public static void ImageSplitMethod(String imagePath,Integer width,Integer height,Integer sw,Integer sh,String output ){
-		String cmd = String.format (FilmConstant.Image_SPLIT,imagePath,width,height,sw,sh,output);
+		String cmd = String.format (MovieConstant.Image_SPLIT,imagePath,width,height,sw,sh,output);
 		CmdUtil.execCmd (cmd);
 	}
 	public static void VideoSplitMethod(String videoPath,String start,String length,String output ){
-		String cmd = String.format (FilmConstant.Video_SPLIT,start,videoPath,length,output);
+		String cmd = String.format (MovieConstant.Video_SPLIT,start,videoPath,length,output);
 		CmdUtil.execCmd (cmd);
 	}
 
@@ -69,7 +69,7 @@ public class FFmpegCmd {
 	 * @param output 输出路径
 	 */
 	public static void VideoSplitToMethod(int start,String videoPath,int length,String output ){
-		String cmd = String.format (FilmConstant.Video_SPLIT_TO,start,videoPath,length,output);
+		String cmd = String.format (MovieConstant.Video_SPLIT_TO,start,videoPath,length,output);
 		CmdUtil.execCmd (cmd);
 	}
 
@@ -79,7 +79,7 @@ public class FFmpegCmd {
 	 * @param output 输出路径
 	 */
 	public static void VideoSplitToNMethod(String videoPath,String output ){
-		String cmd = String.format (FilmConstant.VIDEO_SPLIT_TO_N,videoPath,output)+"/%03d.mp4";
+		String cmd = String.format (MovieConstant.VIDEO_SPLIT_TO_N,videoPath,output)+"/%03d.mp4";
 		CmdUtil.execCmd (cmd);
 	}
 
@@ -91,7 +91,7 @@ public class FFmpegCmd {
 	 */
 
     public static void videoFirstImage(String filePath,String path) {
-		String cmd = String.format(FilmConstant.VIDEO_FIRST_IMAGE,filePath,path, FilmConstant.IMAGE_NAME);
+		String cmd = String.format(MovieConstant.VIDEO_FIRST_IMAGE,filePath,path, MovieConstant.IMAGE_NAME);
 		CmdUtil.execCmd(cmd);
     }
 
@@ -100,7 +100,7 @@ public class FFmpegCmd {
 //	 * @param filePath
 //	 */
 //	public static void fillImageBlack(String filePath,String path) {
-//		String cmd = String.format(FilmConstant.FILL_IMAGE_BLACK,filePath,path, FilmConstant.IMAGE_NAME);
+//		String cmd = String.format(MovieConstant.FILL_IMAGE_BLACK,filePath,path, MovieConstant.IMAGE_NAME);
 //		CmdUtil.execCmd(cmd);
 //	}
 
@@ -109,22 +109,22 @@ public class FFmpegCmd {
 	 * @param filePath
 	 */
 	public static void fillImageBlack(String filePath,String absBlackPath,String absOutPath) {
-		String cmd = String.format(FilmConstant.FILM_IMAGE_BLACK,absBlackPath,filePath,absBlackPath,absOutPath);
+		String cmd = String.format(MovieConstant.FILM_IMAGE_BLACK,absBlackPath,filePath,absBlackPath,absOutPath);
 		CmdUtil.execCmd(cmd);
 	}
 
 	public static void ImageToVodeoMethod(String path, String outPutPath) {
-		String cmd = String.format(FilmConstant.Image_TO_VIdeo,path,outPutPath);
+		String cmd = String.format(MovieConstant.Image_TO_VIdeo,path,outPutPath);
 		CmdUtil.execCmd(cmd);
 	}
 
 	public static void toVideoTs(String path, String s) {
-		String cmd = String.format(FilmConstant.Video_TS,path,s);
+		String cmd = String.format(MovieConstant.Video_TS,path,s);
 		CmdUtil.execCmd(cmd);
 	}
 
 	public static void ConcatMethod(String imgPath, String vPath, String outPut) {
-		String cmd = String.format(FilmConstant.Concat,imgPath,vPath,outPut);
+		String cmd = String.format(MovieConstant.Concat,imgPath,vPath,outPut);
 		CmdUtil.execCmd(cmd);
 	}
 }
